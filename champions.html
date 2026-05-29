@@ -84,10 +84,10 @@
 .years { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
 .years a {
   font-family: var(--label); font-weight: 600; font-size: 0.95rem;
-  padding: 12px 20px; border: 1px solid var(--line); border-radius: var(--r);
-  color: var(--forest-deep); transition: all .2s;
+  padding: 12px 20px; border: 1px solid oklch(1 0 0 / 0.2); border-radius: var(--r);
+  color: var(--on-forest); transition: all .2s;
 }
-.years a:hover { background: var(--forest); color: var(--on-forest); border-color: var(--forest); transform: translateY(-2px); }
+.years a:hover, .years a.active { background: var(--gold); color: var(--forest-deep); border-color: var(--gold); transform: translateY(-2px); }
 </style>
 </head>
 <body>
