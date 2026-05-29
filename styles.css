@@ -1,0 +1,297 @@
+/* ============================================================
+   DIRTY BIRDIE SUMMER CLASSIC — design system
+   Greens + cream. Heritage / editorial.
+   ============================================================ */
+
+/* ---- Fonts ---- */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Archivo:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap');
+
+/* ---- Base palette: Classic golf greens + cream ---- */
+:root {
+  /* surfaces */
+  --bone:        oklch(0.965 0.012 95);   /* page background, warm cream */
+  --bone-deep:   oklch(0.935 0.016 92);   /* alt section */
+  --paper:       oklch(0.99 0.008 95);    /* cards */
+  --forest:      oklch(0.30 0.045 158);   /* deep golf green */
+  --forest-deep: oklch(0.235 0.04 160);   /* near-black green */
+  --fairway:     oklch(0.46 0.085 150);   /* brighter green */
+  --gold:        oklch(0.72 0.105 84);    /* trophy gold accent */
+  --gold-deep:   oklch(0.62 0.10 78);
+  --clay:        oklch(0.58 0.10 55);     /* alt accent (links earthy) */
+
+  /* ink */
+  --ink:         oklch(0.275 0.025 160);
+  --ink-soft:    oklch(0.42 0.022 160);
+  --ink-faint:   oklch(0.56 0.018 155);
+  --on-forest:   oklch(0.95 0.015 95);
+  --on-forest-soft: oklch(0.82 0.02 110);
+
+  /* lines */
+  --line:        oklch(0.30 0.045 158 / 0.16);
+  --line-soft:   oklch(0.30 0.045 158 / 0.09);
+
+  /* type */
+  --display: 'Cormorant Garamond', Georgia, serif;
+  --body:    'Archivo', system-ui, sans-serif;
+  --label:   'Archivo', system-ui, sans-serif;
+  --display-weight: 600;
+  --display-tracking: -0.01em;
+
+  /* accent (themeable) */
+  --accent:      var(--gold);
+  --accent-deep: var(--gold-deep);
+  --hero-overlay: 158;
+
+  /* scale */
+  --maxw: 1240px;
+  --r: 4px;
+  --r-lg: 8px;
+}
+
+/* ---- THEME: Modern Editorial ---- */
+:root[data-theme="editorial"] {
+  --display: 'Spectral', Georgia, serif;
+  --display-weight: 500;
+  --display-tracking: -0.015em;
+  --bone: oklch(0.975 0.006 95);
+  --bone-deep: oklch(0.955 0.008 95);
+  --accent: var(--forest);
+  --accent-deep: var(--forest-deep);
+}
+
+/* ---- THEME: Links Earthy ---- */
+:root[data-theme="links"] {
+  --display: 'Fraunces', Georgia, serif;
+  --display-weight: 500;
+  --display-tracking: -0.005em;
+  --bone:        oklch(0.95 0.018 80);    /* sandier cream */
+  --bone-deep:   oklch(0.915 0.024 78);
+  --forest:      oklch(0.40 0.045 140);   /* sage */
+  --forest-deep: oklch(0.30 0.04 142);
+  --fairway:     oklch(0.52 0.07 130);
+  --accent: var(--clay);
+  --accent-deep: oklch(0.50 0.09 52);
+  --ink: oklch(0.30 0.03 80);
+  --ink-soft: oklch(0.44 0.026 78);
+}
+
+/* ============================================================
+   Reset / base
+   ============================================================ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--body);
+  background: var(--bone);
+  color: var(--ink);
+  line-height: 1.55;
+  font-size: 18px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+
+/* ============================================================
+   Type primitives
+   ============================================================ */
+.display {
+  font-family: var(--display);
+  font-weight: var(--display-weight);
+  letter-spacing: var(--display-tracking);
+  line-height: 1.02;
+  color: var(--forest-deep);
+  text-wrap: balance;
+}
+.eyebrow {
+  font-family: var(--label);
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
+.eyebrow.on-dark { color: var(--gold); }
+.lede {
+  font-size: 1.18rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 46ch;
+  text-wrap: pretty;
+}
+
+/* rule with diamond */
+.flourish {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--accent);
+}
+.flourish::before, .flourish::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: var(--line);
+}
+.flourish .dot {
+  width: 7px; height: 7px;
+  background: var(--accent);
+  transform: rotate(45deg);
+}
+
+/* ============================================================
+   Layout
+   ============================================================ */
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 40px; }
+section { position: relative; }
+.section-pad { padding: clamp(72px, 9vw, 130px) 0; }
+
+/* ============================================================
+   Top bar
+   ============================================================ */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: oklch(0.965 0.012 95 / 0.82);
+  backdrop-filter: blur(14px) saturate(1.1);
+  border-bottom: 1px solid var(--line-soft);
+}
+:root[data-theme="links"] .topbar { background: oklch(0.95 0.018 80 / 0.85); }
+.topbar .wrap {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 78px;
+}
+.brand { display: flex; align-items: center; gap: 14px; }
+.brand .mark {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.6rem;
+  letter-spacing: -0.01em;
+  color: var(--forest-deep);
+  white-space: nowrap;
+}
+.brand .mark em { font-style: italic; color: var(--accent-deep); font-weight: 600; }
+.brand-logo { width: 46px; height: 46px; display: block; flex: none; }
+.footer-logo { width: 74px; height: 74px; display: block; margin-bottom: 18px; }
+.brand .est {
+  font-family: var(--label);
+  font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink-faint);
+  padding-left: 14px; border-left: 1px solid var(--line); white-space: nowrap;
+}
+.nav { display: flex; align-items: center; gap: 34px; }
+.nav a {
+  font-family: var(--label);
+  font-size: 0.82rem; font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  position: relative;
+  padding: 6px 0;
+  transition: color .2s;
+}
+.nav a:hover { color: var(--forest-deep); }
+.nav a.active { color: var(--forest-deep); }
+.nav a::after {
+  content: ""; position: absolute; left: 0; bottom: 0;
+  width: 0; height: 2px; background: var(--accent);
+  transition: width .25s ease;
+}
+.nav a:hover::after, .nav a.active::after { width: 100%; }
+.nav-cta {
+  font-family: var(--label);
+  font-size: 0.8rem; font-weight: 600; letter-spacing: 0.03em;
+  color: var(--on-forest) !important;
+  background: var(--forest);
+  padding: 11px 20px; border-radius: var(--r);
+  white-space: nowrap;
+  transition: background .2s, transform .2s;
+}
+.nav-cta::after { display: none; }
+.nav-cta:hover { background: var(--forest-deep); transform: translateY(-1px); }
+
+/* ============================================================
+   Buttons
+   ============================================================ */
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--label);
+  font-size: 0.92rem; font-weight: 600; letter-spacing: 0.02em;
+  padding: 15px 26px;
+  border-radius: var(--r);
+  cursor: pointer; border: 1px solid transparent;
+  transition: transform .2s, background .2s, color .2s, border-color .2s;
+}
+.btn .arr { transition: transform .2s; }
+.btn:hover .arr { transform: translateX(4px); }
+.btn-primary { background: var(--forest); color: var(--on-forest); }
+.btn-primary:hover { background: var(--forest-deep); transform: translateY(-2px); }
+.btn-ghost { background: transparent; color: var(--forest-deep); border-color: var(--line); }
+.btn-ghost:hover { border-color: var(--forest); background: oklch(0.30 0.045 158 / 0.04); }
+.btn-gold { background: var(--gold); color: var(--forest-deep); }
+.btn-gold:hover { background: var(--gold-deep); transform: translateY(-2px); }
+.btn-on-dark { background: var(--bone); color: var(--forest-deep); }
+.btn-on-dark:hover { background: var(--paper); transform: translateY(-2px); }
+
+/* ============================================================
+   Photo placeholders (atmospheric, on-palette)
+   ============================================================ */
+.photo {
+  position: relative; overflow: hidden;
+  background:
+    linear-gradient(135deg, oklch(0.42 0.07 150) 0%, oklch(0.30 0.05 158) 55%, oklch(0.24 0.04 160) 100%);
+  border-radius: var(--r-lg);
+}
+.photo.sky {
+  background:
+    linear-gradient(180deg, oklch(0.78 0.05 95) 0%, oklch(0.66 0.07 110) 30%, oklch(0.5 0.08 135) 62%, oklch(0.38 0.06 150) 100%);
+}
+.photo.sand {
+  background:
+    linear-gradient(160deg, oklch(0.8 0.05 88) 0%, oklch(0.66 0.07 82) 45%, oklch(0.5 0.06 130) 100%);
+}
+.photo::after {
+  content: "";
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(135deg, transparent 0 14px, oklch(1 0 0 / 0.04) 14px 15px);
+  mix-blend-mode: overlay;
+}
+.photo .photo-label {
+  position: absolute; left: 16px; bottom: 14px; z-index: 2;
+  font-family: 'SF Mono', ui-monospace, Menlo, monospace;
+  font-size: 0.66rem; letter-spacing: 0.08em;
+  color: oklch(1 0 0 / 0.72);
+  background: oklch(0.2 0.03 160 / 0.35);
+  padding: 5px 9px; border-radius: 3px;
+  backdrop-filter: blur(3px);
+}
+image-slot { border-radius: var(--r-lg); overflow: hidden; }
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.footer {
+  background: var(--forest-deep);
+  color: var(--on-forest-soft);
+  padding: 72px 0 40px;
+}
+.footer a { color: var(--on-forest-soft); transition: color .2s; }
+.footer a:hover { color: var(--gold); }
+
+/* ============================================================
+   Utility
+   ============================================================ */
+.center { text-align: center; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+
+@media (max-width: 860px) {
+  body { font-size: 16px; }
+  .wrap { padding: 0 22px; }
+  .nav { display: none; }
+}
+
+
+/* ============================================================
+   Production image rules (replaces in-editor <image-slot>)
+   ============================================================ */
+img.hero-bg { width: 100%; height: 100%; object-fit: cover; }
+.slot-img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: var(--r-lg); }

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dirty Birdie Summer Classic</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ============ HOMEPAGE LAYOUT ============ */
+
+/* --- Hero --- */
+.hero { position: relative; min-height: 90vh; display: flex; align-items: flex-end; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; border-radius: 0; }
+.hero-veil {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, oklch(0.22 0.04 160 / 0.15) 0%, oklch(0.2 0.04 160 / 0) 30%, oklch(0.18 0.04 160 / 0.62) 78%, oklch(0.16 0.04 160 / 0.82) 100%),
+    linear-gradient(90deg, oklch(0.18 0.04 160 / 0.55) 0%, oklch(0.18 0.04 160 / 0.05) 55%);
+}
+.hero-inner { position: relative; z-index: 2; padding-bottom: clamp(56px, 7vw, 96px); padding-top: 120px; width: 100%; }
+.hero-title {
+  font-size: clamp(3.4rem, 8.5vw, 7.6rem);
+  color: var(--on-forest);
+  margin: 18px 0 0;
+  text-shadow: 0 2px 30px oklch(0.15 0.04 160 / 0.4);
+}
+.hero-lede { color: oklch(0.94 0.012 95 / 0.9); font-size: clamp(1.05rem, 1.6vw, 1.35rem); max-width: 50ch; margin-top: 26px; line-height: 1.55; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 40px; }
+.hero-badge {
+  position: absolute; z-index: 3; right: 40px; bottom: clamp(56px, 7vw, 96px);
+  background: oklch(0.965 0.012 95 / 0.94); backdrop-filter: blur(8px);
+  border-radius: var(--r-lg); padding: 22px 26px; max-width: 320px;
+  box-shadow: 0 20px 50px oklch(0.15 0.04 160 / 0.35);
+  transition: transform .25s, box-shadow .25s;
+}
+.hero-badge:hover { transform: translateY(-3px); box-shadow: 0 26px 60px oklch(0.15 0.04 160 / 0.42); }
+.hero-badge .yr { font-family: var(--display); font-weight: 600; font-size: 2.1rem; color: var(--forest-deep); line-height: 1; }
+.hero-badge .loc { font-family: var(--label); font-size: 0.82rem; color: var(--ink-soft); margin-top: 8px; }
+.hero-badge .open { font-family: var(--label); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-deep); margin-top: 12px; font-weight: 600; display: flex; align-items: center; gap: 7px; }
+.hero-badge .open::before { content:""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px oklch(0.72 0.105 84 / 0.25); }
+@media(max-width: 860px){ .hero-badge { display: none; } }
+
+/* Minimal hero treatment (Tweaks) — clean cream, dark type, no photo veil */
+[data-hero="minimal"] .hero { min-height: 78vh; background: var(--bone); align-items: center; }
+[data-hero="minimal"] .hero-bg { display: none; }
+[data-hero="minimal"] .hero-veil { display: none; }
+[data-hero="minimal"] .hero-inner { padding-top: 90px; }
+[data-hero="minimal"] .hero-title { color: var(--forest-deep); text-shadow: none; }
+[data-hero="minimal"] .hero-lede { color: var(--ink-soft); }
+[data-hero="minimal"] .hero .eyebrow.on-dark { color: var(--accent-deep); }
+[data-hero="minimal"] .btn-on-dark { background: var(--forest); color: var(--on-forest); }
+[data-hero="minimal"] .hero-badge { background: var(--forest); }
+[data-hero="minimal"] .hero-badge .yr { color: var(--on-forest); }
+[data-hero="minimal"] .hero-badge .loc { color: var(--on-forest-soft); }
+[data-hero="minimal"] .hero-badge .open { color: var(--gold); }
+
+/* --- Section header --- */
+.sec-head { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: 54px; }
+.sec-head h2 { font-size: clamp(2.4rem, 4.2vw, 3.7rem); }
+@media(max-width: 760px){ .sec-head { grid-template-columns: 1fr; gap: 16px; } }
+
+/* --- Champion feature --- */
+.feature { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(40px, 6vw, 84px); align-items: center; }
+.feature.flip { grid-template-columns: 0.95fr 1.05fr; }
+.feature .media { position: relative; aspect-ratio: 4/3.2; }
+.feature .media image-slot { width: 100%; height: 100%; }
+.feature h2 { font-size: clamp(2.6rem, 5vw, 4.4rem); margin: 16px 0 0; }
+.feature .body { margin-top: 22px; }
+.feature .actions { margin-top: 34px; display:flex; gap: 14px; flex-wrap: wrap; }
+.media-tag {
+  position: absolute; top: -16px; left: -16px; z-index: 3;
+  background: var(--gold); color: var(--forest-deep);
+  font-family: var(--display); font-weight: 700; font-size: 1.1rem;
+  width: 92px; height: 92px; border-radius: 50%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; line-height: 1.05;
+  box-shadow: 0 12px 30px oklch(0.15 0.04 160 / 0.3);
+}
+.media-tag small { font-family: var(--label); font-size: 0.5rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; }
+@media(max-width: 760px){ .feature, .feature.flip { grid-template-columns: 1fr; gap: 36px; } .feature.flip .media { order: -1; } }
+
+/* --- Host section (dark) --- */
+.host { background: var(--forest-deep); color: var(--on-forest); overflow: hidden; }
+.host .eyebrow { color: var(--gold); }
+.host h2 { color: var(--on-forest); }
+.host .lede { color: var(--on-forest-soft); }
+.host-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px,6vw,80px); align-items: center; }
+.host-media { aspect-ratio: 5/4; }
+.host-media image-slot { width:100%; height:100%; }
+.host h2 { font-size: clamp(2.6rem, 5vw, 4.2rem); margin-top: 16px; }
+.host-feats { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; margin-top: 44px; border-top: 1px solid oklch(1 0 0 / 0.14); }
+.host-feat { padding: 26px 22px 0 0; border-right: 1px solid oklch(1 0 0 / 0.1); }
+.host-feat:last-child { border-right: none; padding-right: 0; }
+.host-feat .n { font-family: var(--display); font-size: 1.4rem; color: var(--gold); }
+.host-feat h3 { font-family: var(--label); font-weight: 600; font-size: 0.98rem; margin: 10px 0 6px; color: var(--on-forest); }
+.host-feat p { font-size: 0.86rem; color: var(--on-forest-soft); line-height: 1.5; }
+@media(max-width: 760px){ .host-grid { grid-template-columns: 1fr; } }
+
+/* --- Dinner strip --- */
+.dinner { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(40px,6vw,80px); align-items: center; }
+.dinner .media { aspect-ratio: 3/4; max-height: 560px; }
+.dinner .media image-slot { width:100%; height:100%; }
+.dinner h2 { font-size: clamp(2.4rem, 4.5vw, 3.8rem); margin-top: 14px; }
+@media(max-width: 760px){ .dinner { grid-template-columns: 1fr; } .dinner .media { max-height: 420px; } }
+
+/* --- Champions preview wall --- */
+.champ-preview { background: var(--bone-deep); }
+.wall { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.champ-card {
+  background: var(--paper); border: 1px solid var(--line-soft);
+  border-radius: var(--r-lg); padding: 26px 24px 22px;
+  position: relative; transition: transform .22s, box-shadow .22s, border-color .22s;
+}
+.champ-card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px oklch(0.15 0.04 160 / 0.12); border-color: var(--line); }
+.champ-card .yr { font-family: var(--label); font-size: 0.74rem; font-weight: 600; letter-spacing: 0.12em; color: var(--accent-deep); }
+.champ-card .name { font-family: var(--display); font-weight: 600; font-size: 1.62rem; color: var(--forest-deep); margin: 10px 0 4px; line-height: 1.08; }
+.champ-card .loc { font-size: 0.82rem; color: var(--ink-faint); }
+.champ-card.crown { background: var(--forest); }
+.champ-card.crown .yr { color: var(--gold); }
+.champ-card.crown .name { color: var(--on-forest); }
+.champ-card.crown .loc { color: var(--on-forest-soft); }
+.champ-card.crown .ribbon { position:absolute; top:24px; right:24px; font-size:0.66rem; letter-spacing:0.12em; text-transform:uppercase; font-weight:700; color: var(--forest-deep); background: var(--gold); padding:4px 9px; border-radius: 3px; }
+@media(max-width: 980px){ .wall { grid-template-columns: repeat(2,1fr); } }
+@media(max-width: 480px){ .wall { grid-template-columns: 1fr; } }
+
+/* --- Footer --- */
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; align-items: start; padding-bottom: 50px; }
+.footer .mark { font-family: var(--display); font-weight: 700; font-size: 1.9rem; color: var(--on-forest); }
+.footer .mark em { font-style: italic; color: var(--gold); }
+.footer .tag { color: var(--on-forest-soft); margin-top: 14px; max-width: 36ch; font-size: 0.92rem; }
+.footer h4 { font-family: var(--label); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+.footer ul { list-style: none; display: flex; flex-direction: column; gap: 11px; font-size: 0.92rem; }
+.footer .base { border-top: 1px solid oklch(1 0 0 / 0.12); padding-top: 26px; display:flex; justify-content: space-between; font-size: 0.78rem; color: oklch(0.82 0.02 110 / 0.7); }
+@media(max-width: 760px){ .footer-grid { grid-template-columns: 1fr; gap: 30px; } .footer .base { flex-direction: column; gap: 10px; } }
+</style>
+</head>
+<body>
+
+<!-- ============ TOP BAR ============ -->
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <img class="brand-logo" src="images/logo.png" alt="Dirty Birdie Summer Classic crest">
+      <span class="mark">Dirty <em>Birdie</em></span>
+    </a>
+    <nav class="nav">
+      <a href="#itinerary">Itinerary</a>
+      <a href="#leaderboard">Leaderboard</a>
+      <a href="champions.html">History</a>
+      <a href="#rules">Rules</a>
+      <a class="nav-cta" href="champions.html">The Wall</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<header class="hero" data-screen-label="Hero">
+  <img class="hero-bg" src="images/hero.png" alt="Gamble Sands golf course at first light">
+  <div class="hero-veil"></div>
+  <div class="wrap hero-inner">
+    <p class="eyebrow on-dark">Est. 2012 · Annual Invitational</p>
+    <h1 class="display hero-title">Dirty Birdie<br>Summer Classic</h1>
+    <p class="hero-lede">Fourteen summers of competition, camaraderie, and unforgettable rounds. One trophy. The same friends chasing it across the great courses of the Pacific Northwest.</p>
+    <div class="hero-actions">
+      <a class="btn btn-gold" href="champions.html">View the Champions Wall <span class="arr">→</span></a>
+      <a class="btn btn-on-dark" href="results-2025.html">2025 Results</a>
+    </div>
+  </div>
+  <a class="hero-badge" href="#host">
+    <div class="yr">2026</div>
+    <div class="loc">Gamble Sands · Brewster, Washington</div>
+    <div class="open">Registration opens soon</div>
+  </a>
+</header>
+
+<!-- ============ 2025 CHAMPION ============ -->
+<section class="section-pad" id="leaderboard" data-screen-label="2025 Champion">
+  <div class="wrap">
+    <div class="feature">
+      <div class="media">
+        <div class="media-tag">2025<small>Champion</small></div>
+        <img class="slot-img" src="images/champion-2025.png" alt="2025 Dirty Birdie champion Alim Walji">
+      </div>
+      <div class="copy">
+        <p class="eyebrow">Reigning Champion</p>
+        <h2 class="display">Alim Walji</h2>
+        <div class="body">
+          <p class="lede">Crowned at Whistler, British Columbia, Alim takes his place among the names etched into Dirty Birdie history — and sets the table for everyone chasing him in 2026.</p>
+        </div>
+        <div class="actions">
+          <a class="btn btn-primary" href="results-2025.html">Full 2025 Results <span class="arr">→</span></a>
+          <a class="btn btn-ghost" href="champions.html">The Champions Wall</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2026 HOST ============ -->
+<section class="section-pad host" id="host" data-screen-label="2026 Host Course">
+  <div class="wrap">
+    <div class="host-grid">
+      <div class="host-media">
+        <img class="slot-img" src="images/gamble-sands.png" alt="Gamble Sands golf course, Washington">
+      </div>
+      <div>
+        <p class="eyebrow">Coming Summer 2026</p>
+        <h2 class="display">Gamble Sands<br>Washington</h2>
+        <p class="lede" style="margin-top:22px;">The Classic heads to one of the most celebrated links courses in the Pacific Northwest — set high above the Columbia River, rolling through the sage hills of central Washington. One for the books.</p>
+        <div class="host-feats">
+          <div class="host-feat">
+            <div class="n">I</div>
+            <h3>World-class links</h3>
+            <p>Firm, fast, and walkable — a true links test in the high desert.</p>
+          </div>
+          <div class="host-feat">
+            <div class="n">II</div>
+            <h3>Champions Dinner</h3>
+            <p>The Friday-night tradition honoring last year's winner.</p>
+          </div>
+          <div class="host-feat">
+            <div class="n">III</div>
+            <h3>Columbia Basin views</h3>
+            <p>Dramatic vistas across the river and the rolling sage.</p>
+          </div>
+        </div>
+        <div style="margin-top:40px;">
+          <a class="btn btn-gold" href="#itinerary">Tournament Itinerary <span class="arr">→</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHAMPIONS DINNER ============ -->
+<section class="section-pad" id="itinerary" data-screen-label="Champions Dinner">
+  <div class="wrap">
+    <div class="dinner">
+      <div class="media">
+        <img class="slot-img" src="images/champions-dinner.png" alt="Dirty Birdie Champions Dinner">
+      </div>
+      <div>
+        <p class="eyebrow">An Annual Tradition</p>
+        <h2 class="display">The Champions Dinner</h2>
+        <p class="lede" style="margin-top:22px;">Every year, the Classic opens with a Champions Dinner held on the Friday of tournament week — a toast to the past year's winner and the start of another summer of bragging rights. In 2026, we raise a glass to Alim Walji.</p>
+        <div class="flourish" style="margin:34px 0; max-width:280px;"><span class="dot"></span></div>
+        <a class="btn btn-ghost" href="#">Dinner Details <span class="arr">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHAMPIONS PREVIEW WALL ============ -->
+<section class="section-pad champ-preview" id="rules" data-screen-label="Champions Preview">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow">Hall of Fame · 2012—2025</p>
+        <h2 class="display">A proud line of champions</h2>
+      </div>
+      <div style="justify-self:end; text-align:right;">
+        <p class="lede" style="margin-left:auto;">Eleven champions. Three two-time winners. One trophy that's traveled the Northwest for fourteen summers.</p>
+        <a class="btn btn-primary" style="margin-top:22px;" href="champions.html">See the full wall <span class="arr">→</span></a>
+      </div>
+    </div>
+    <div class="wall">
+      <div class="champ-card crown">
+        <span class="ribbon">Reigning</span>
+        <div class="yr">2025</div>
+        <div class="name">Alim Walji</div>
+        <div class="loc">Whistler, BC</div>
+      </div>
+      <div class="champ-card">
+        <div class="yr">2024</div>
+        <div class="name">Ally Bharmal</div>
+        <div class="loc">Victoria, BC</div>
+      </div>
+      <div class="champ-card">
+        <div class="yr">2023</div>
+        <div class="name">Rahim Kabani</div>
+        <div class="loc">Whistler, BC</div>
+      </div>
+      <div class="champ-card">
+        <div class="yr">2022</div>
+        <div class="name">Ray Jaffer</div>
+        <div class="loc">Whistler, BC</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer" data-screen-label="Footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <img class="footer-logo" src="images/logo.png" alt="">
+        <div class="mark">Dirty <em>Birdie</em></div>
+        <p class="tag">The Dirty Birdie Summer Classic — an annual invitational tournament bringing the same friends together on the great courses of the Pacific Northwest since 2012.</p>
+      </div>
+      <div>
+        <h4>Tournament</h4>
+        <ul>
+          <li><a href="#itinerary">Itinerary</a></li>
+          <li><a href="#leaderboard">Leaderboard</a></li>
+          <li><a href="#rules">Rules</a></li>
+          <li><a href="#host">2026 Host</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>History</h4>
+        <ul>
+          <li><a href="champions.html">Champions Wall</a></li>
+          <li><a href="results-2025.html">Past Tournaments</a></li>
+          <li><a href="#">Records &amp; Stats</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="base">
+      <span>© 2026 Dirty Birdie Summer Classic · Est. 2012</span>
+      <span>Brewster, WA · Whistler, BC · Predator Ridge</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

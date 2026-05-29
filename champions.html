@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Champions Wall · Dirty Birdie Summer Classic</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ============ CHAMPIONS PAGE ============ */
+
+/* --- Page header --- */
+.page-head { background: var(--forest-deep); color: var(--on-forest); padding: clamp(86px,11vw,150px) 0 clamp(60px,7vw,96px); position: relative; overflow: hidden; }
+.page-head::after {
+  content:""; position:absolute; inset:0; opacity:0.5;
+  background: radial-gradient(120% 90% at 85% 10%, oklch(0.46 0.085 150 / 0.5), transparent 60%);
+}
+.page-head .wrap { position: relative; z-index: 2; }
+.page-head .eyebrow { color: var(--gold); }
+.page-head h1 { font-size: clamp(3.2rem, 7vw, 6.2rem); color: var(--on-forest); margin-top: 18px; }
+.page-head .sub { color: var(--on-forest-soft); font-size: clamp(1.05rem,1.5vw,1.3rem); max-width: 52ch; margin-top: 24px; line-height: 1.55; }
+
+/* --- Stats strip --- */
+.stats { background: var(--gold); }
+.stats .wrap { display: grid; grid-template-columns: repeat(4,1fr); }
+.stat { padding: 32px 30px; border-right: 1px solid oklch(0.62 0.10 78 / 0.5); }
+.stat:last-child { border-right: none; }
+.stat .n { font-family: var(--display); font-weight: 700; font-size: clamp(2.4rem,4vw,3.4rem); color: var(--forest-deep); line-height: 1; }
+.stat .l { font-family: var(--label); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: oklch(0.36 0.06 78); margin-top: 10px; font-weight: 600; }
+@media(max-width: 720px){ .stats .wrap { grid-template-columns: 1fr 1fr; } .stat:nth-child(2){border-right:none;} .stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid oklch(0.62 0.10 78 / 0.5);} }
+
+/* --- Reigning feature --- */
+.reign { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(36px,5vw,72px); align-items: center; }
+.reign .media { position: relative; aspect-ratio: 4/3.4; }
+.reign .media image-slot { width:100%; height:100%; }
+.reign h2 { font-size: clamp(3rem,6vw,5.4rem); margin: 12px 0 0; }
+.reign .meta { display: flex; gap: 30px; margin-top: 26px; flex-wrap: wrap; }
+.reign .meta div { }
+.reign .meta .k { font-family: var(--label); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); }
+.reign .meta .v { font-family: var(--display); font-size: 1.5rem; color: var(--forest-deep); margin-top: 4px; }
+.reign .media-tag {
+  position:absolute; top:-18px; left:-18px; z-index:3;
+  background: var(--gold); color: var(--forest-deep);
+  font-family: var(--display); font-weight:700; font-size:1.15rem;
+  width:104px; height:104px; border-radius:50%;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; line-height:1;
+  box-shadow: 0 14px 34px oklch(0.15 0.04 160 / 0.3);
+}
+.reign .media-tag small { font-family: var(--label); font-size:0.5rem; letter-spacing:0.14em; text-transform:uppercase; font-weight:700; margin-top:5px;}
+@media(max-width: 760px){ .reign { grid-template-columns: 1fr; gap: 40px; } }
+
+/* --- The wall --- */
+.wall-sec { background: var(--bone-deep); }
+.grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+.plaque {
+  background: var(--paper); border: 1px solid var(--line-soft);
+  border-radius: var(--r-lg); padding: 28px 26px 24px;
+  position: relative; overflow: hidden;
+  transition: transform .22s, box-shadow .22s, border-color .22s;
+}
+.plaque:hover { transform: translateY(-4px); box-shadow: 0 18px 42px oklch(0.15 0.04 160 / 0.13); border-color: var(--line); }
+.plaque .yr { font-family: var(--display); font-weight: 700; font-size: 2.5rem; color: var(--accent-deep); line-height: 1; letter-spacing: -0.01em; }
+.plaque .rule { height: 1px; background: var(--line); margin: 16px 0 14px; }
+.plaque .name { font-family: var(--display); font-weight: 600; font-size: 1.5rem; color: var(--forest-deep); line-height: 1.1; }
+.plaque .loc { font-family: var(--label); font-size: 0.82rem; color: var(--ink-faint); margin-top: 7px; }
+.plaque .tag {
+  display: inline-block; margin-top: 16px;
+  font-family: var(--label); font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700;
+  color: var(--accent-deep); border: 1px solid var(--line); padding: 4px 9px; border-radius: 3px;
+}
+.plaque.two .tag { color: var(--forest-deep); background: oklch(0.72 0.105 84 / 0.2); border-color: oklch(0.72 0.105 84 / 0.4); }
+@media(max-width: 980px){ .grid { grid-template-columns: repeat(2,1fr); } }
+@media(max-width: 460px){ .grid { grid-template-columns: 1fr; } }
+
+/* --- Two-time callout --- */
+.repeat-sec .flourish { margin-bottom: 30px; }
+.repeat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+.repeat-card { border: 1px solid var(--line); border-radius: var(--r-lg); padding: 30px 28px; background: var(--paper); }
+.repeat-card .name { font-family: var(--display); font-weight: 600; font-size: 1.9rem; color: var(--forest-deep); }
+.repeat-card .yrs { font-family: var(--label); font-size: 0.9rem; color: var(--ink-soft); margin-top: 8px; }
+.repeat-card .big { font-family: var(--display); font-weight: 700; font-size: 3.2rem; color: var(--gold-deep); float: right; line-height: 0.8; }
+@media(max-width: 760px){ .repeat-grid { grid-template-columns: 1fr; } }
+
+/* --- Past years --- */
+.years { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+.years a {
+  font-family: var(--label); font-weight: 600; font-size: 0.95rem;
+  padding: 12px 20px; border: 1px solid var(--line); border-radius: var(--r);
+  color: var(--forest-deep); transition: all .2s;
+}
+.years a:hover { background: var(--forest); color: var(--on-forest); border-color: var(--forest); transform: translateY(-2px); }
+</style>
+</head>
+<body>
+
+<!-- ============ TOP BAR ============ -->
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <img class="brand-logo" src="images/logo.png" alt="Dirty Birdie Summer Classic crest">
+      <span class="mark">Dirty <em>Birdie</em></span>
+    </a>
+    <nav class="nav">
+      <a href="index.html#itinerary">Itinerary</a>
+      <a href="index.html#leaderboard">Leaderboard</a>
+      <a href="champions.html" class="active">History</a>
+      <a href="index.html#rules">Rules</a>
+      <a class="nav-cta" href="index.html">Home</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ PAGE HEADER ============ -->
+<header class="page-head" data-screen-label="Champions Header">
+  <div class="wrap">
+    <p class="eyebrow">Hall of Fame</p>
+    <h1 class="display">The Champions Wall</h1>
+    <p class="sub">Fourteen summers. Eleven champions. One trophy, passed hand to hand across the great courses of the Pacific Northwest since the inaugural Classic in 2012.</p>
+  </div>
+</header>
+
+<!-- ============ STATS ============ -->
+<section class="stats" data-screen-label="Records">
+  <div class="wrap">
+    <div class="stat"><div class="n">14</div><div class="l">Editions Played</div></div>
+    <div class="stat"><div class="n">11</div><div class="l">Champions Crowned</div></div>
+    <div class="stat"><div class="n">3</div><div class="l">Two-Time Winners</div></div>
+    <div class="stat"><div class="n">9×</div><div class="l">Hosted at Whistler</div></div>
+  </div>
+</section>
+
+<!-- ============ REIGNING CHAMPION ============ -->
+<section class="section-pad" data-screen-label="Reigning Champion">
+  <div class="wrap">
+    <div class="reign">
+      <div class="media">
+        <div class="media-tag">2025<small>Champion</small></div>
+        <img class="slot-img" src="images/champion-2025.png" alt="2025 champion Alim Walji">
+      </div>
+      <div>
+        <p class="eyebrow">Reigning Champion · 2025</p>
+        <h2 class="display">Alim Walji</h2>
+        <div class="meta">
+          <div><div class="k">Tournament</div><div class="v">Whistler, BC</div></div>
+          <div><div class="k">Edition</div><div class="v">14th Annual</div></div>
+          <div><div class="k">Defends</div><div class="v">Gamble Sands ’26</div></div>
+        </div>
+        <p class="lede" style="margin-top:28px;">Alim's name is the newest on the trophy — and the one everyone will be chasing when the Classic heads to Gamble Sands next summer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE WALL ============ -->
+<section class="section-pad wall-sec" data-screen-label="The Wall">
+  <div class="wrap">
+    <div class="flourish" style="margin-bottom:46px;"><span class="dot"></span></div>
+    <div class="grid">
+      <div class="plaque two">
+        <div class="yr">2024</div><div class="rule"></div>
+        <div class="name">Ally Bharmal</div><div class="loc">Victoria, BC</div>
+        <span class="tag">Two-Time Champion</span>
+      </div>
+      <div class="plaque">
+        <div class="yr">2023</div><div class="rule"></div>
+        <div class="name">Rahim Kabani</div><div class="loc">Whistler, BC</div>
+      </div>
+      <div class="plaque two">
+        <div class="yr">2022</div><div class="rule"></div>
+        <div class="name">Ray Jaffer</div><div class="loc">Whistler, BC</div>
+        <span class="tag">Two-Time Champion</span>
+      </div>
+      <div class="plaque two">
+        <div class="yr">2021</div><div class="rule"></div>
+        <div class="name">Shafiq Kara</div><div class="loc">Predator Ridge, BC</div>
+        <span class="tag">Two-Time Champion</span>
+      </div>
+      <div class="plaque">
+        <div class="yr">2020</div><div class="rule"></div>
+        <div class="name">Rahim Dhanji</div><div class="loc">Whistler, BC</div>
+      </div>
+      <div class="plaque two">
+        <div class="yr">2019</div><div class="rule"></div>
+        <div class="name">Ray Jaffer</div><div class="loc">Whistler, BC</div>
+        <span class="tag">Two-Time Champion</span>
+      </div>
+      <div class="plaque">
+        <div class="yr">2018</div><div class="rule"></div>
+        <div class="name">Aleem Teja</div><div class="loc">Bellevue, WA</div>
+      </div>
+      <div class="plaque">
+        <div class="yr">2017</div><div class="rule"></div>
+        <div class="name">Haneef Hameer</div><div class="loc">Whistler, BC</div>
+      </div>
+      <div class="plaque">
+        <div class="yr">2016</div><div class="rule"></div>
+        <div class="name">Karim Walji</div><div class="loc">Whistler, BC</div>
+      </div>
+      <div class="plaque">
+        <div class="yr">2015</div><div class="rule"></div>
+        <div class="name">Amyeen Hassanali</div><div class="loc">Whistler, BC</div>
+      </div>
+      <div class="plaque">
+        <div class="yr">2014</div><div class="rule"></div>
+        <div class="name">Riz Mitha</div><div class="loc">Whistler, BC</div>
+      </div>
+      <div class="plaque two">
+        <div class="yr">2013</div><div class="rule"></div>
+        <div class="name">Shafiq Kara</div><div class="loc">Seattle, WA</div>
+        <span class="tag">Two-Time Champion</span>
+      </div>
+      <div class="plaque">
+        <div class="yr">2012</div><div class="rule"></div>
+        <div class="name">Ally Bharmal</div><div class="loc">Predator Ridge, BC</div>
+        <span class="tag">Inaugural Champion</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TWO-TIME CHAMPIONS ============ -->
+<section class="section-pad repeat-sec" data-screen-label="Two-Time Champions">
+  <div class="wrap">
+    <div class="flourish"><span class="dot"></span></div>
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow">The Short List</p>
+        <h2 class="display">Two-time champions</h2>
+      </div>
+      <p class="lede" style="justify-self:end;">Only three names appear on the trophy twice. In fourteen editions, nobody has won three.</p>
+    </div>
+    <div class="repeat-grid">
+      <div class="repeat-card">
+        <span class="big">2×</span>
+        <div class="name">Ray Jaffer</div>
+        <div class="yrs">Champion in 2019 &amp; 2022</div>
+      </div>
+      <div class="repeat-card">
+        <span class="big">2×</span>
+        <div class="name">Shafiq Kara</div>
+        <div class="yrs">Champion in 2013 &amp; 2021</div>
+      </div>
+      <div class="repeat-card">
+        <span class="big">2×</span>
+        <div class="name">Ally Bharmal</div>
+        <div class="yrs">Champion in 2012 &amp; 2024</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PAST TOURNAMENTS ============ -->
+<section class="section-pad" style="background:var(--forest-deep);" data-screen-label="Past Tournaments">
+  <div class="wrap">
+    <p class="eyebrow" style="color:var(--gold);">Browse the Archive</p>
+    <h2 class="display" style="color:var(--on-forest); font-size:clamp(2.2rem,4vw,3.4rem); margin-top:14px;">Every tournament, year by year</h2>
+    <div class="years">
+      <a href="results-2025.html">2025</a><a href="results-2024.html">2024</a><a href="results-2023.html">2023</a><a href="results-2022.html">2022</a>
+      <a href="results-2021.html">2021</a><a href="results-2020.html">2020</a><a href="results-2019.html">2019</a><a href="results-2018.html">2018</a>
+      <a href="results-2017.html">2017</a><a href="results-2016.html">2016</a><a href="results-2015.html">2015</a><a href="results-2014.html">2014</a>
+      <a href="results-2013.html">2013</a><a href="results-2012.html">2012</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer" data-screen-label="Footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <img class="footer-logo" src="images/logo.png" alt="">
+        <div class="mark">Dirty <em>Birdie</em></div>
+        <p class="tag">The Dirty Birdie Summer Classic — an annual invitational tournament bringing the same friends together on the great courses of the Pacific Northwest since 2012.</p>
+      </div>
+      <div>
+        <h4>Tournament</h4>
+        <ul>
+          <li><a href="index.html#itinerary">Itinerary</a></li>
+          <li><a href="index.html#leaderboard">Leaderboard</a></li>
+          <li><a href="index.html#rules">Rules</a></li>
+          <li><a href="index.html#host">2026 Host</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>History</h4>
+        <ul>
+          <li><a href="champions.html">Champions Wall</a></li>
+          <li><a href="results-2025.html">Past Tournaments</a></li>
+          <li><a href="#">Records &amp; Stats</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="base">
+      <span>© 2026 Dirty Birdie Summer Classic · Est. 2012</span>
+      <span>Brewster, WA · Whistler, BC · Predator Ridge</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
