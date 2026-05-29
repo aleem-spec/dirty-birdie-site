@@ -12,6 +12,7 @@ Netlify, or GitHub Pages.
 - `index.html` — homepage (hero, 2025 champion, 2026 host, Champions Dinner, champions preview, footer)
 - `champions.html` — Champions Wall / history (stats strip + 14-edition grid + two-time champions)
 - `results-2025.html` — per-year results page. **This is the template** — clone it to `results-YYYY.html` for other years.
+- `itinerary.html` — upcoming-tournament showcase + 3-day itinerary. Currently the 2026 Gamble Sands host. See `ITINERARY-PAGE.md`.
 - `styles.css` — the entire design system (tokens + components). Edit here for anything global.
 - `images/` — all photos. Filenames are referenced directly in the HTML.
 
@@ -22,6 +23,7 @@ Netlify, or GitHub Pages.
   3. In `index.html`, update the 2025 champion section and the first card of `.wall`.
 - **Add a results page for a year:** copy `results-2025.html` → `results-YYYY.html`; edit the header (year · location · champion), intro paragraph, champion callout, group photo, and results image. If a year has no results image, delete the "FINAL RESULTS" `<section>`. Archive links already point to `results-YYYY.html`, so it's linked automatically. See `ADD-YEAR-PAGES.md` for the full data table and a ready-to-paste prompt.
 - **Swap a photo:** replace the file in `images/` keeping the same name, or add a new file and update the matching `<img src>`.
+- **Update the itinerary / host showcase:** edit `itinerary.html` — hero, the four course cards, The Inn, Food & Drink, the 3-day timeline, and copy. Swap photos in `images/` (`gs-*.png`). See `ITINERARY-PAGE.md`.
 - **Edit copy:** text lives directly in the HTML inside semantic tags — edit in place.
 
 ## Design conventions (do not drift from these)

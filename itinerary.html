@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026 · Gamble Sands · Dirty Birdie Summer Classic</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ============ ITINERARY / SHOWCASE PAGE ============ */
+
+/* --- Hero --- */
+.show-hero { position: relative; min-height: 88vh; display: flex; align-items: flex-end; overflow: hidden; }
+.show-hero .hero-bg { position: absolute; inset: 0; }
+.show-hero .hero-bg .slot-img, .show-hero .hero-bg image-slot { width: 100%; height: 100%; }
+.show-veil { position: absolute; inset: 0; background:
+  linear-gradient(180deg, oklch(0.2 0.04 160 / 0.12) 0%, oklch(0.2 0.04 160 / 0) 32%, oklch(0.16 0.04 160 / 0.66) 76%, oklch(0.14 0.04 160 / 0.86) 100%),
+  linear-gradient(90deg, oklch(0.16 0.04 160 / 0.5) 0%, oklch(0.16 0.04 160 / 0) 55%); }
+.show-hero .inner { position: relative; z-index: 2; padding-bottom: clamp(54px,7vw,96px); padding-top: 120px; width: 100%; }
+.show-hero .eyebrow { color: var(--gold); }
+.show-hero h1 { font-size: clamp(3.4rem,8.5vw,7.4rem); color: var(--on-forest); margin-top: 16px; text-shadow: 0 2px 30px oklch(0.15 0.04 160 / 0.4); line-height: 0.98; }
+.show-hero .place { font-family: var(--label); font-size: 1.05rem; letter-spacing: 0.04em; color: oklch(0.94 0.012 95 / 0.92); margin-top: 22px; display: flex; flex-wrap: wrap; gap: 10px 22px; }
+.show-hero .place span { display: flex; align-items: center; gap: 9px; }
+.show-hero .place .d { width: 6px; height: 6px; background: var(--gold); transform: rotate(45deg); }
+
+/* --- Intro --- */
+.show-intro { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(36px,6vw,84px); align-items: start; }
+.show-intro h2 { font-size: clamp(2.2rem,4vw,3.4rem); }
+.show-intro .lede { font-size: 1.22rem; max-width: none; }
+.show-intro .note { margin-top: 22px; font-size: 1.05rem; color: var(--ink-soft); line-height: 1.6; }
+@media(max-width:760px){ .show-intro { grid-template-columns: 1fr; gap: 18px; } }
+
+/* --- Courses --- */
+.courses-sec { background: var(--forest-deep); color: var(--on-forest); }
+.courses-sec .eyebrow { color: var(--gold); }
+.courses-sec h2 { color: var(--on-forest); font-size: clamp(2.2rem,4vw,3.4rem); }
+.course-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; margin-top: 50px; }
+.course {
+  background: oklch(0.27 0.04 160); border: 1px solid oklch(1 0 0 / 0.1);
+  border-radius: var(--r-lg); overflow: hidden; display: flex; flex-direction: column;
+  transition: transform .22s, border-color .22s;
+}
+.course:hover { transform: translateY(-4px); border-color: oklch(0.72 0.105 84 / 0.5); }
+.course .pic { aspect-ratio: 16/10; position: relative; }
+.course .pic image-slot, .course .pic .slot-img { width: 100%; height: 100%; }
+.course .pad { padding: 26px 28px 30px; }
+.course .kicker { font-family: var(--label); font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+.course h3 { font-family: var(--display); font-weight: 600; font-size: 1.9rem; color: var(--on-forest); margin: 8px 0 0; }
+.course p { color: var(--on-forest-soft); font-size: 0.96rem; line-height: 1.55; margin-top: 12px; }
+.course .holes { margin-top: 16px; font-family: var(--label); font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: oklch(0.82 0.02 110 / 0.75); border-top: 1px solid oklch(1 0 0 / 0.1); padding-top: 14px; }
+@media(max-width:760px){ .course-grid { grid-template-columns: 1fr; } }
+
+/* --- Stay + Dine split --- */
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(36px,5vw,72px); align-items: center; }
+.split .media { aspect-ratio: 5/4; }
+.split .media image-slot, .split .media .slot-img { width:100%; height:100%; }
+.split h2 { font-size: clamp(2.2rem,4vw,3.4rem); margin-top: 14px; }
+.split.flip .media { order: -1; }
+.dine-list { margin-top: 26px; display: flex; flex-direction: column; gap: 20px; }
+.dine-item { border-top: 1px solid var(--line); padding-top: 18px; }
+.dine-item h3 { font-family: var(--display); font-weight: 600; font-size: 1.5rem; color: var(--forest-deep); }
+.dine-item p { font-size: 0.98rem; color: var(--ink-soft); margin-top: 6px; line-height: 1.55; }
+@media(max-width:760px){ .split, .split.flip { grid-template-columns: 1fr; gap: 32px; } .split.flip .media { order: 0; } }
+
+/* --- Itinerary timeline --- */
+.itin-sec { background: var(--bone-deep); }
+.itin { margin-top: 50px; display: flex; flex-direction: column; gap: 18px; }
+.day { display: grid; grid-template-columns: 220px 1fr; gap: 32px; background: var(--paper); border: 1px solid var(--line-soft); border-radius: var(--r-lg); padding: 32px 34px; }
+.day .when { border-right: 1px solid var(--line); padding-right: 28px; }
+.day .when .d { font-family: var(--display); font-weight: 700; font-size: 2rem; color: var(--accent-deep); line-height: 1; }
+.day .when .date { font-family: var(--label); font-size: 0.82rem; color: var(--ink-faint); margin-top: 8px; letter-spacing: 0.04em; }
+.day .events { display: flex; flex-direction: column; gap: 14px; }
+.evt { display: grid; grid-template-columns: 92px 1fr; gap: 18px; align-items: baseline; }
+.evt .t { font-family: 'SF Mono', ui-monospace, monospace; font-size: 0.84rem; color: var(--fairway); font-weight: 600; }
+.evt .what { }
+.evt .what strong { font-family: var(--label); font-weight: 600; font-size: 1.05rem; color: var(--forest-deep); }
+.evt .what span { display: block; font-size: 0.9rem; color: var(--ink-soft); margin-top: 2px; }
+@media(max-width:680px){ .day { grid-template-columns: 1fr; gap: 18px; } .day .when { border-right: none; border-bottom: 1px solid var(--line); padding-right: 0; padding-bottom: 16px; } .evt { grid-template-columns: 74px 1fr; gap: 12px; } }
+
+/* --- CTA --- */
+.cta-sec { background: var(--forest-deep); color: var(--on-forest); text-align: center; }
+.cta-sec h2 { color: var(--on-forest); font-size: clamp(2.2rem,4.5vw,3.6rem); }
+.cta-sec .lede { color: var(--on-forest-soft); margin: 20px auto 36px; text-align: center; }
+.cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+
+<!-- ============ TOP BAR ============ -->
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <img class="brand-logo" src="images/logo.png" alt="Dirty Birdie Summer Classic crest">
+      <span class="mark">Dirty <em>Birdie</em></span>
+    </a>
+    <nav class="nav">
+      <a href="itinerary.html" class="active">Itinerary</a>
+      <a href="index.html#leaderboard">Leaderboard</a>
+      <a href="champions.html">History</a>
+      <a href="results-2025.html">Archive</a>
+      <a href="index.html#rules">Rules</a>
+      <a class="nav-cta" href="champions.html">The Wall</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<header class="show-hero" data-screen-label="Showcase Hero">
+  <div class="hero-bg">
+    <img class="slot-img" src="images/gs-hero.png" alt="Gamble Sands golf course">
+  </div>
+  <div class="show-veil"></div>
+  <div class="wrap inner">
+    <p class="eyebrow">The 15th Annual · Summer 2026</p>
+    <h1 class="display">Gamble Sands</h1>
+    <div class="place">
+      <span><span class="d"></span> Brewster, Washington</span>
+      <span><span class="d"></span> Above the Columbia River</span>
+      <span><span class="d"></span> David McLay Kidd Links</span>
+    </div>
+  </div>
+</header>
+
+<!-- ============ INTRO ============ -->
+<section class="section-pad" data-screen-label="The Destination">
+  <div class="wrap">
+    <div class="show-intro">
+      <div>
+        <p class="eyebrow">The 2026 Destination</p>
+        <h2 class="display">The Classic heads to the high desert</h2>
+      </div>
+      <div>
+        <p class="lede">For its fifteenth edition, the Dirty Birdie Summer Classic crosses into central Washington — to one of the most celebrated links destinations in North America, set high above the mighty Columbia River.</p>
+        <p class="note">Two championship courses from the inventive mind of David McLay Kidd, firm-and-fast fescue turf, a 14-hole short course, sunset putting, and farm-to-table dining — all a few steps from your room. This is a golf trip built for exactly what we do: great golf, great company, and a trophy on the line.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE COURSES ============ -->
+<section class="section-pad courses-sec" data-screen-label="The Courses">
+  <div class="wrap">
+    <p class="eyebrow">The Golf</p>
+    <h2 class="display">Four ways to play</h2>
+    <div class="course-grid">
+      <div class="course">
+        <div class="pic"><img class="slot-img" src="images/gs-gamble.png" alt="Gamble Sands original course"></div>
+        <div class="pad">
+          <div class="kicker">The Main Event</div>
+          <h3>Gamble Sands</h3>
+          <p>The original masterpiece — a firm, fast and supremely playable links named Golf Digest's Best New Public. Wide fairways, bold contours, and views for days.</p>
+          <div class="holes">18 Holes · Par 72 · David McLay Kidd</div>
+        </div>
+      </div>
+      <div class="course">
+        <div class="pic"><img class="slot-img" src="images/gs-scarecrow.png" alt="Scarecrow course"></div>
+        <div class="pad">
+          <div class="kicker">The New Challenge</div>
+          <h3>Scarecrow</h3>
+          <p>The resort's second 18 — so alluring you'll want to head straight back to the first tee. A Best New Public winner in its very first season.</p>
+          <div class="holes">18 Holes · Par 72 · David McLay Kidd</div>
+        </div>
+      </div>
+      <div class="course">
+        <div class="pic"><img class="slot-img" src="images/gs-quicksands.png" alt="Quicksands short course"></div>
+        <div class="pad">
+          <div class="kicker">The Short Course</div>
+          <h3>Quicksands</h3>
+          <p>Grab a handful of wedges and your putter for what may be the most enjoyable, creative course you've ever played. Pure fun.</p>
+          <div class="holes">14 Holes · Short Course · David McLay Kidd</div>
+        </div>
+      </div>
+      <div class="course">
+        <div class="pic"><img class="slot-img" src="images/gs-cascades.png" alt="The Cascades putting course"></div>
+        <div class="pad">
+          <div class="kicker">After Hours</div>
+          <h3>The Cascades</h3>
+          <p>An enormous putting course inspired by the Himalayas at St Andrews — the perfect spot to settle after-dinner bets at sunset over the Columbia.</p>
+          <div class="holes">Putting Course · Sunset Views</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STAY ============ -->
+<section class="section-pad" data-screen-label="The Inn">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <p class="eyebrow">Where We Stay</p>
+        <h2 class="display">The Inn at Gamble Sands</h2>
+        <p class="lede" style="margin-top:22px;">Wake to views of the Columbia River and the golf below, grab a coffee, and walk to the first tee. Rated the best golf resort in Washington — and home base for the whole crew.</p>
+        <p class="note" style="color:var(--ink-soft); margin-top:18px;">77 luxury rooms, fire pits under the high-desert sky, and world-class golf a few minutes from the door. Bring the group; do it all again tomorrow.</p>
+      </div>
+      <div class="media"><img class="slot-img" src="images/gs-inn.png" alt="The Inn at Gamble Sands"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DINE ============ -->
+<section class="section-pad" style="padding-top:0;" data-screen-label="Food & Drink">
+  <div class="wrap">
+    <div class="split flip">
+      <div class="media"><img class="slot-img" src="images/gs-dine.png" alt="Food and drink at Gamble Sands"></div>
+      <div>
+        <p class="eyebrow">Food &amp; Drink</p>
+        <h2 class="display">Farm to table, on the 18th</h2>
+        <div class="dine-list">
+          <div class="dine-item">
+            <h3>Danny Boy</h3>
+            <p>A rustic, farm-to-table experience drawing on the Gebbers family's century of ranching and farming the land around the resort.</p>
+          </div>
+          <div class="dine-item">
+            <h3>The Barn</h3>
+            <p>Casual, chef-inspired pizzas and easy meals — indoors or out, overlooking the original course's 18th green.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ITINERARY ============ -->
+<section class="section-pad itin-sec" data-screen-label="Tournament Itinerary">
+  <div class="wrap">
+    <p class="eyebrow">The Weekend</p>
+    <h2 class="display" style="font-size:clamp(2.2rem,4vw,3.4rem);">Tournament itinerary</h2>
+    <p class="lede" style="margin-top:18px;">A sample three-day schedule — final times will be confirmed closer to the event.</p>
+    <div class="itin">
+      <div class="day">
+        <div class="when"><div class="d">Day One</div><div class="date">Friday · Arrival</div></div>
+        <div class="events">
+          <div class="evt"><div class="t">2:00 PM</div><div class="what"><strong>Check-in at The Inn</strong><span>Settle in, grab the room keys and a coffee.</span></div></div>
+          <div class="evt"><div class="t">3:30 PM</div><div class="what"><strong>Practice round &amp; Quicksands</strong><span>Loosen up on the short course; warm up the rivalries.</span></div></div>
+          <div class="evt"><div class="t">7:00 PM</div><div class="what"><strong>Champions Dinner</strong><span>A toast to last year's winner, Alim Walji, and the week ahead.</span></div></div>
+        </div>
+      </div>
+      <div class="day">
+        <div class="when"><div class="d">Day Two</div><div class="date">Saturday · Round One</div></div>
+        <div class="events">
+          <div class="evt"><div class="t">8:30 AM</div><div class="what"><strong>Round 1 — Gamble Sands</strong><span>The Classic begins on the original course. Shotgun start.</span></div></div>
+          <div class="evt"><div class="t">2:00 PM</div><div class="what"><strong>Lunch at The Barn</strong><span>Pizzas and scorecards over the 18th green.</span></div></div>
+          <div class="evt"><div class="t">7:30 PM</div><div class="what"><strong>Cascades &amp; fire pits</strong><span>Sunset putting bets over the Columbia.</span></div></div>
+        </div>
+      </div>
+      <div class="day">
+        <div class="when"><div class="d">Day Three</div><div class="date">Sunday · Final Round</div></div>
+        <div class="events">
+          <div class="evt"><div class="t">8:30 AM</div><div class="what"><strong>Round 2 — Scarecrow</strong><span>The title decided on the resort's new championship 18.</span></div></div>
+          <div class="evt"><div class="t">2:30 PM</div><div class="what"><strong>Awards at Danny Boy</strong><span>Crowning the 2026 champion, farm-to-table.</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="section-pad cta-sec" data-screen-label="Plan Your Trip">
+  <div class="wrap">
+    <p class="eyebrow" style="color:var(--gold);">See You in Brewster</p>
+    <h2 class="display">Defend it, or take it.</h2>
+    <p class="lede">Fifteen summers in, the trophy's up for grabs again — this time on the firm, fast fairways of Gamble Sands.</p>
+    <div class="cta-actions">
+      <a class="btn btn-gold" href="champions.html">The Champions Wall <span class="arr">→</span></a>
+      <a class="btn btn-on-dark" href="https://www.gamblesands.com" target="_blank" rel="noopener">Explore Gamble Sands</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer" data-screen-label="Footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <img class="footer-logo" src="images/logo.png" alt="">
+        <div class="mark">Dirty <em>Birdie</em></div>
+        <p class="tag">The Dirty Birdie Summer Classic — an annual invitational tournament bringing the same friends together on the great courses of the Pacific Northwest since 2012.</p>
+      </div>
+      <div>
+        <h4>Tournament</h4>
+        <ul>
+          <li><a href="itinerary.html">Itinerary</a></li>
+          <li><a href="index.html#leaderboard">Leaderboard</a></li>
+          <li><a href="index.html#rules">Rules</a></li>
+          <li><a href="itinerary.html">2026 Host</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>History</h4>
+        <ul>
+          <li><a href="champions.html">Champions Wall</a></li>
+          <li><a href="champions.html">Past Tournaments</a></li>
+          <li><a href="#">Records &amp; Stats</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="base">
+      <span>© 2026 Dirty Birdie Summer Classic · Est. 2012</span>
+      <span>Brewster, WA · Whistler, BC · Predator Ridge</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
