@@ -58,6 +58,7 @@
       <a href="champions.html">History</a>
       <a href="results-2025.html">Results</a>
     </nav>
+    <button class="nav-toggle" aria-label="Open menu" onclick="this.closest('.topbar').classList.toggle('nav-open')"><span></span><span></span><span></span></button>
   </div>
 </header>
 
@@ -134,5 +135,6 @@
   </div>
 </footer>
 
+<script>document.querySelectorAll('.nav a').forEach(function(a){a.addEventListener('click',function(){document.querySelector('.topbar').classList.remove('nav-open')})});</script>
 </body>
 </html>
